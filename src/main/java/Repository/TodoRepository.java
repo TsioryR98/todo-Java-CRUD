@@ -91,7 +91,23 @@ public class TodoRepository implements TodoDAO{
 
     @Override
     public Todo update(int id, Todo toUpdate) {
-        return null;
+        String query =  "UPDATE todotable SET title=?, description=?, creationdate=?, deadline=?, executiondate=?, priority=?, state=? WHERE id=?";
+        try(Connection conn = dataBaseConnect.getConnection();
+            PreparedStatement statement = conn.prepareStatement(query)){
+            statement.setString(1,toUpdate.getTitle());
+            statement.setString(2,toUpdate.getDescription());
+            statement.setObject(3,Timestamp.valueOf(toUpdate.getCreationDate()));
+            statement.setObject(4,Timestamp.valueOf(toUpdate.getDeadline()));
+            statement.setObject(5,Timestamp.valueOf(toUpdate.getExecutionDate()));
+            statement.setString(6, String.valueOf(toUpdate.getPriority()));
+            statement.setString(7, String.valueOf(toUpdate.getState()));
+            statement.setInt(8,toUpdate.getId());
+
+            statement.executeUpdate();
+            return toUpdate;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

@@ -28,4 +28,7 @@ public class TodoService {
     public List<Todo> findByStatus(Status state){
         return todoRepository.searchByStates(state);
     }
+    public Todo updateById(int id, Todo toUpdate){
+        return todoRepository.update(id,toUpdate);
+    }
 }

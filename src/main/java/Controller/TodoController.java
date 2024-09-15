@@ -36,13 +36,17 @@ public class TodoController {
         return  todoService.showById(id);
     }
 
-            @PostMapping("/todo")
-            public void create(@RequestBody Todo toAdd){
-                todoService.create(toAdd);
-            }
+    @PostMapping("/todo")
+    public void create(@RequestBody Todo toAdd){
+        todoService.create(toAdd);
+    }
 
     @GetMapping("/search")
     public List<Todo> findByStatus(@RequestParam Status state) {
         return todoService.findByStatus(state);
+    }
+    @PutMapping("/todos/{id}")
+    public Todo updateById(@PathVariable int id, @RequestBody Todo toUpdate){
+        return todoService.updateById(id,toUpdate);
     }
 }
