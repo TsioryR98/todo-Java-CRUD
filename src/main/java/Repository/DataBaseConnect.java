@@ -12,9 +12,9 @@ public class DataBaseConnect {
     public Connection getConnection() {
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/todolist", "postgres", "tsiory98");
+            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/todolist", "postgres", "tsiory98");//only for the test
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return connection;
     }
